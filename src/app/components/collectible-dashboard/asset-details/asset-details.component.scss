@@ -1,0 +1,18 @@
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  background: #f5f5f5;
+  border-radius: 4px;
+
+  .detail-label {
+    font-size: 0.875rem;
+    color: #666;
+    margin-bottom: 4px;
+  }
+
+  .detail-value {
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+}

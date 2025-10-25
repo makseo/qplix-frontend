@@ -1,0 +1,24 @@
+<mat-card>
+  <mat-card-header cdkDragHandle class="drag-handle">
+    <mat-card-title>
+      Performance Analytics
+      <mat-icon>drag_indicator</mat-icon>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <ngx-charts-line-chart
+      [view]="[600, 300]"
+      [results]="chartData()"
+      [xAxis]="true"
+      [yAxis]="true"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      xAxisLabel="Year"
+      yAxisLabel="Value (USD)"
+      [autoScale]="true"
+      [gradient]="false"
+      [timeline]="false"
+    >
+    </ngx-charts-line-chart>
+  </mat-card-content>
+</mat-card>

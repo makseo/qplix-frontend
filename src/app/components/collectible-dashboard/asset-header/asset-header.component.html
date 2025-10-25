@@ -1,0 +1,24 @@
+<section class="header-section">
+  <mat-card class="header-card">
+    <div class="header-content">
+      <div class="asset-info">
+        <h1 class="asset-name">{{ name() }}</h1>
+        <div class="value-display">
+          <span class="value-label">Current Estimated Value</span>
+          <span class="value-amount">{{ estimatedValue() | currency }}</span>
+        </div>
+      </div>
+
+      <div class="image-container">
+        <app-carousel
+          [images]="images()"
+          [aspectRatio]="'16/9'"
+          [showCaptions]="true"
+          [showIndicators]="true"
+          [showNavigation]="true"
+        >
+        </app-carousel>
+      </div>
+    </div>
+  </mat-card>
+</section>

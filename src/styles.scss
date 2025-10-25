@@ -4,6 +4,7 @@ html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -15,4 +16,9 @@ app-task3 {
   display: block;
   padding: 32px;
   overflow: hidden;
+}
+
+.drag-handle {
+  cursor: grab;
+  user-select: none;
 }

@@ -1,0 +1,63 @@
+.header-section {
+  margin-bottom: 24px;
+
+  .header-card {
+    background: lightblue;
+    color: #333;
+  }
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px;
+  }
+
+  .asset-info {
+    flex: 1;
+  }
+
+  .asset-name {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin: 0 0 16px 0;
+  }
+
+  .value-display {
+    .value-label {
+      display: block;
+      font-size: 1rem;
+      opacity: 0.8;
+      margin-bottom: 8px;
+    }
+
+    .value-amount {
+      font-size: 2.25rem;
+      font-weight: 500;
+      color: white;
+    }
+  }
+
+  .image-container {
+    flex: 0 0 auto;
+    margin-left: 32px;
+    width: 540px;
+  }
+}
+
+// Responsive design
+@media (max-width: 1024px) {
+  .header-section {
+    .header-content {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .image-container {
+      margin-left: 0;
+      margin-top: 24px;
+      width: 100%;
+      max-width: 400px;
+    }
+  }
+}

@@ -1,0 +1,42 @@
+<mat-card>
+  <mat-card-header cdkDragHandle class="drag-handle">
+    <mat-card-title>
+      Transaction History
+      <mat-icon>drag_indicator</mat-icon>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <table mat-table [dataSource]="transactions()" class="transactions-table">
+      <!-- Date Column -->
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Date</th>
+        <td mat-cell *matCellDef="let transaction">
+          {{ transaction.date | date:'mediumDate' }}
+        </td>
+      </ng-container>
+
+      <!-- Sale Price Column -->
+      <ng-container matColumnDef="salePrice">
+        <th mat-header-cell *matHeaderCellDef>Sale Price</th>
+        <td mat-cell *matCellDef="let transaction">
+          {{ transaction.salePrice | currency }}
+        </td>
+      </ng-container>
+
+      <!-- Location Column -->
+      <ng-container matColumnDef="location">
+        <th mat-header-cell *matHeaderCellDef>Location</th>
+        <td mat-cell *matCellDef="let transaction">{{ transaction.location }}</td>
+      </ng-container>
+
+      <!-- Details Column -->
+      <ng-container matColumnDef="details">
+        <th mat-header-cell *matHeaderCellDef>Details</th>
+        <td mat-cell *matCellDef="let transaction">{{ transaction.details }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card-content>
+</mat-card>

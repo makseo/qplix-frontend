@@ -1,0 +1,42 @@
+<div class="dashboard-header">
+  <h1>Collectible Asset Dashboard</h1>
+  <p>Supports drag-and-drop (order saved in localStorage), responsive design, shared image carousel, and ngx-charts.</p>
+</div>
+
+<div class="dashboard-container">
+  <app-asset-header
+    [name]="assetDetails().name"
+    [estimatedValue]="assetDetails().estimatedValue"
+    [images]="assetDetails().images"
+  />
+
+  <div
+    cdkDropList
+    cdkDropListOrientation="mixed"
+    class="main-grid"
+    (cdkDropListDropped)="onDrop($event)"
+    [cdkDropListData]="dashboardItems()"
+  >
+    @for (item of dashboardItems(); track item.id; let i = $index) {
+      <div
+        class="dashboard-item"
+        cdkDrag
+        [cdkDragData]="item"
+      >
+        <div class="item-content">
+          @switch (item.id) {
+            @case ('details') {
+              <app-asset-details [assetDetails]="assetDetails()"/>
+            }
+            @case ('performance') {
+              <app-performance-chart [performanceData]="performanceData()"/>
+            }
+            @case ('transactions') {
+              <app-transaction-history [transactions]="transactions()"/>
+            }
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>

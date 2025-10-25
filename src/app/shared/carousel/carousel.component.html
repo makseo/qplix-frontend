@@ -1,0 +1,56 @@
+<div class="carousel" [style.aspect-ratio]="aspectRatio()">
+
+  <div class="carousel-viewport">
+    <img
+      [ngSrc]="currentImage.url"
+      [alt]="currentImage.alt"
+      fill
+      priority
+      class="carousel-image">
+
+    @if (showCaptions() && currentImage.caption) {
+      <div class="image-caption">
+        {{ currentImage.caption }}
+      </div>
+    }
+  </div>
+
+  @if (showNavigation() && hasMultipleImages) {
+    <!-- Navigation Arrows -->
+    <button
+      mat-icon-button
+      class="carousel-nav carousel-nav-prev"
+      (click)="previousImage()"
+      aria-label="Previous image">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      class="carousel-nav carousel-nav-next"
+      (click)="nextImage()"
+      aria-label="Next image">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  }
+
+  @if (showIndicators() && hasMultipleImages) {
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+      @for (image of images(); track image.url; let i = $index) {
+        <button
+          class="indicator"
+          [class.active]="i === currentImageIndex()"
+          (click)="goToImage(i)"
+          [attr.aria-label]="'Go to image ' + (i + 1) + ': ' + image.alt">
+        </button>
+      }
+    </div>
+  }
+
+  <!-- Image counter -->
+  @if (hasMultipleImages) {
+    <div class="image-counter">
+      {{ currentImageIndex() + 1 }} / {{ images().length }}
+    </div>
+  }
+</div>

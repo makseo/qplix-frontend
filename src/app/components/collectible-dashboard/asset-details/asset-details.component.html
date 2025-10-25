@@ -1,0 +1,28 @@
+<mat-card>
+  <mat-card-header cdkDragHandle class="drag-handle">
+    <mat-card-title>
+      Asset Details
+      <mat-icon>drag_indicator</mat-icon>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="details-grid">
+      <div class="detail-item">
+        <span class="detail-label">Acquisition Date</span>
+        <span class="detail-value">{{ assetDetails().acquisitionDate | date:'longDate' }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Acquisition Cost</span>
+        <span class="detail-value">{{ assetDetails().acquisitionCost | currency }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Serial Number</span>
+        <span class="detail-value">{{ assetDetails().serialNumber }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Condition</span>
+        <span class="detail-value">{{ assetDetails().condition }}</span>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
