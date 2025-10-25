@@ -1,0 +1,40 @@
+<form [formGroup]="filterForm" class="filter-bar">
+  @for (field of config().fields; track field.key) {
+    <div class="filter-field">
+      @switch (field.type) {
+        @case ('text') {
+          <mat-form-field appearance="outline" class="filter-input">
+            <mat-label>{{ field.label }}</mat-label>
+            <input matInput [formControlName]="field.key" [placeholder]="field.placeholder ?? ''"/>
+          </mat-form-field>
+        }
+        @case ('multi-select') {
+          <mat-form-field appearance="outline" class="filter-input">
+            <mat-label>{{ field.label }}</mat-label>
+            <mat-select [formControlName]="field.key" multiple>
+              @for (option of field.options; track option) {
+                <mat-option [value]="option.value">{{ option.label }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        }
+        @case ('select') {
+          <mat-form-field appearance="outline" class="filter-input">
+            <mat-label>{{ field.label }}</mat-label>
+            <mat-select [formControlName]="field.key">
+              @for (option of field.options; track option) {
+                <mat-option [value]="option.value">{{ option.label }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        }
+      }
+    </div>
+  }
+
+  <div class="filter-actions">
+    <button mat-flat-button type="button" (click)="clearFilter()">
+      Clear All
+    </button>
+  </div>
+</form>

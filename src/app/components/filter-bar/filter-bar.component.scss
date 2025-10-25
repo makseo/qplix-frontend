@@ -1,0 +1,28 @@
+:host {
+  display: block;
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  padding: 16px;
+  background: #fafafa;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+
+  .filter-field {
+    flex: 1;
+    min-width: 200px;
+
+    .filter-input {
+      width: 100%;
+    }
+  }
+
+  .filter-actions {
+    flex-shrink: 0;
+    margin-left: auto;
+  }
+}

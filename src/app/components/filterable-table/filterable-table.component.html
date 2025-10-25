@@ -1,7 +1,4 @@
-<!-- Feel free to replace this placeholder with your filterbar -->
-<fieldset class="filter-bar-placeholder">
-  <legend>Filter bar should go here</legend>
-</fieldset>
+<ng-content select="filter-bar"></ng-content>
 
 <div class="table-wrapper">
   @if (isLoading) {
@@ -13,4 +10,13 @@
   <table mat-table [dataSource]="dataSource ?? []" class="mat-elevation-z8">
     <ng-content></ng-content>
   </table>
+
+  <mat-paginator
+    showFirstLastButtons
+    [pageIndex]="pageIndex"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    [length]="totalItems"
+    (page)="onPageChange($event)">
+  </mat-paginator>
 </div>

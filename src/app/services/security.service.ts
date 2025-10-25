@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { delay, Observable, of } from 'rxjs';
-import { Security } from '../models/security';
-import { SECURITIES } from '../mocks/securities-mocks';
-import { SecuritiesFilter } from '../models/securities-filter';
+import {Injectable} from '@angular/core';
+import {delay, Observable, of} from 'rxjs';
+import {Security} from '../models/security';
+import {SECURITIES} from '../mocks/securities-mocks';
+import {SecuritiesFilter} from '../models/securities-filter';
 
 @Injectable({
   providedIn: 'root',
@@ -11,13 +11,14 @@ export class SecurityService {
   /**
    * Get Securities server request mock
    * */
-  getSecurities(securityFilter?: SecuritiesFilter): Observable<Security[]> {
-    const filteredSecurities = this._filterSecurities(securityFilter).slice(
+  getSecurities(securityFilter?: SecuritiesFilter): Observable<{ items: Security[]; total: number }> {
+    const filteredSecurities = this._filterSecurities(securityFilter);
+    const pagedSecurities = filteredSecurities.slice(
       securityFilter?.skip ?? 0,
-      securityFilter?.limit ?? 100
+      (securityFilter?.skip ?? 0) + (securityFilter?.limit ?? 100)
     );
 
-    return of(filteredSecurities).pipe(delay(1000));
+    return of({items: pagedSecurities, total: filteredSecurities.length}).pipe(delay(1000));
   }
 
   private _filterSecurities(

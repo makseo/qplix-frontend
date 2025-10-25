@@ -1,8 +1,13 @@
 <filterable-table
   class="security-list"
-  [dataSource]="securities$ | async"
+  [dataSource]="(securities$ | async)?.items ?? []"
   [isLoading]="loadingSecurities$ | async"
+  [pageIndex]="pageIndex()"
+  [totalItems]="totalItems()"
+  (pageChange)="onPageChange($event)"
 >
+  <filter-bar [config]="filterConfig" (filterChange)="onFilterChange($event)"></filter-bar>
+
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
     <td mat-cell *matCellDef="let security">{{ security.name }}</td>
