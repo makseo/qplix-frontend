@@ -1,8 +1,7 @@
-import {Component, signal, TrackByFunction} from '@angular/core';
+import {ChangeDetectionStrategy, Component, computed, signal, TrackByFunction} from '@angular/core';
 import {CdkFixedSizeVirtualScroll, CdkVirtualForOf, CdkVirtualScrollViewport} from '@angular/cdk/scrolling';
 import {MatCheckbox} from '@angular/material/checkbox';
 import {MatButton} from '@angular/material/button';
-import {SelectionModel} from '@angular/cdk/collections';
 
 interface Row {
   id: number;
@@ -25,22 +24,44 @@ function createRows(): Row[] {
   standalone: true,
   templateUrl: './task2.component.html',
   styleUrls: ['./task2.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Task2Component {
   rows = signal<Row[]>(createRows())
 
-  selectionModel = new SelectionModel<Row>(true, undefined, undefined, (o1, o2) => o1.id === o2.id)
-  trackBy: TrackByFunction<Row> | undefined = (index, item) => item.id;
+  // NOTICE: store only ids to reduce memory consumption
+  private selectedIds = signal<Set<number>>(new Set());
 
-  recreateData() {
-    this.rows.set(createRows())
+  // NOTICE: Precompute selection state for each row to avoid recalculating it on each change detection cycle
+  protected selectionMap = computed(() => {
+    const selected = this.selectedIds();
+    const map = new Map<number, boolean>();
+    this.rows().forEach(row => map.set(row.id, selected.has(row.id)));
+    return map;
+  });
+
+  protected trackBy: TrackByFunction<Row> | undefined = (index, item) => item.id;
+
+  protected toggle(row: Row) {
+    const currentSelection = new Set(this.selectedIds());
+    if (currentSelection.has(row.id)) {
+      currentSelection.delete(row.id);
+    } else {
+      currentSelection.add(row.id);
+    }
+    this.selectedIds.set(currentSelection);
   }
 
-  selectAll() {
-    this.selectionModel.select(...this.rows())
+  protected selectAll() {
+    this.selectedIds.set(new Set(this.rows().map(row => row.id)));
   }
 
-  deselectAll() {
-    this.selectionModel.deselect(...this.rows())
+  protected deselectAll() {
+    this.selectedIds.set(new Set());
+  }
+
+  protected recreateData() {
+    this.rows.set(createRows());
+    this.selectedIds.set(new Set());
   }
 }
