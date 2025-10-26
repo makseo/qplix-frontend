@@ -1,6 +1,7 @@
 import {Routes} from '@angular/router';
 import {Task1Component} from './tasks/task1/task1.component';
 import {Task2Component} from './tasks/task2/task2.component';
+import {Task22Component} from './tasks/task2/task22.component';
 import {Task3Component} from './tasks/task3/task3.component';
 
 export const routes: Routes = [
@@ -94,6 +95,19 @@ export const routes: Routes = [
         Since this might be a tricky one: If you don't find a solution try to bring us some of the insights you gathered and how you approached this challenge. :)
         </li>
       </ul>
+      `
+    }
+  },
+  {
+    path: "task22",
+    component: Task22Component,
+    data: {
+      title: "Improve selection performance (Alternative)",
+      description: `
+      <h6>Introduction</h6>
+      <p>
+        This is an alternative implementation of Task 2 that demonstrates how to solve the selection performance problem using Angular Material's built-in SelectionModel from @angular/cdk/collections.
+      </p>
       `
     }
   },

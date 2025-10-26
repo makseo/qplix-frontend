@@ -27,7 +27,7 @@ function createRows(): Row[] {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Task2Component {
-  rows = signal<Row[]>(createRows())
+  rows = signal<Row[]>(createRows());
 
   // NOTICE: store only ids to reduce memory consumption
   private selectedIds = signal<Set<number>>(new Set());
@@ -40,7 +40,7 @@ export class Task2Component {
     return map;
   });
 
-  protected trackBy: TrackByFunction<Row> | undefined = (index, item) => item.id;
+  protected trackBy: TrackByFunction<Row> | undefined = (_, item) => item.id;
 
   protected toggle(row: Row) {
     const currentSelection = new Set(this.selectedIds());
